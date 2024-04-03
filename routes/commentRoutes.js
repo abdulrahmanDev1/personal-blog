@@ -1,8 +1,16 @@
-const router = require('express').Router()
+const router = require('express').Router({ mergeParams: true })
 const commentController = require('../controllers/commentController')
+const { protect } = require('../controllers/authController')
+
+router.use(protect)
 
 router.get('/', commentController.getAllComments)
-router.post('/', commentController.checkBody, commentController.createComment)
+router.post(
+  '/',
+  commentController.checkBody,
+  commentController.setPostId,
+  commentController.createComment
+)
 
 router
   .route('/:id')

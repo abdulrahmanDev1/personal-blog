@@ -1,4 +1,4 @@
-const router = require('express').Router({ mergeParams: true })
+const router = require('express').Router()
 const postController = require('../controllers/postController')
 const commentRouter = require('./commentRoutes')
 
