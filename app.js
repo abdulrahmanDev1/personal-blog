@@ -6,6 +6,7 @@ const globalErrorHandler = require('./controllers/errorController')
 const postRouter = require('./routes/postRoutes')
 const categoryRouter = require('./routes/categoryRoutes')
 const commentRouter = require('./routes/commentRoutes')
+const userRouter = require('./routes/userRoutes')
 const morgan = require('morgan')
 const dotenv = require('dotenv')
 
@@ -35,6 +36,7 @@ app.use(mongoSanitize())
 app.use('/api/v1/posts', postRouter)
 app.use('/api/v1/categories', categoryRouter)
 app.use('/api/v1/comments', commentRouter)
+app.use('/api/v1/users', userRouter)
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404))

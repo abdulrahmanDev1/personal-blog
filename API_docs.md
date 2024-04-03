@@ -2,18 +2,6 @@
 
 Welcome to the API Documentation for the Personal Blog project
 
-<details>
-<summary>Navigation</summary>
-
-- [Authentication](#authentication)
-- [Endpoints](#endpoints)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Error Handling](#error-handling)
-- [Security](#security)
-- [Questions or Issues?](#questions-or-issues)
-</details>
-
 ## Overview
 
 the API provides endpoints for managing categories, posts, and comments. It allows users to interact with the data by performing CRUD (Create, Read, Update, Delete) operations.
@@ -26,84 +14,9 @@ The base URL for accessing the API is `https://api.example.com`.
 
 ## Authentication
 
+_not yet implemented_
+
 Authentication is required for certain endpoints. We use JSON Web Tokens (JWT) for authentication. To authenticate, include the JWT token in the `Authorization` header of your requests.
-
-### Authentication Routes
-
-- **POST /signup**: Create a new user account.
-- **POST /login**: Authenticate and generate a JWT token.
-- **POST /forgot-password**: Request to reset forgotten password.
-- **PATCH /reset-password/:token**: Reset password using the token received after forgot password request.
-- **PATCH /update-my-password**: Update Password For the current user
-
-_After signing up or logging in, the API will provide a JWT token, which should be included in the `Authorization` header for subsequent requests._
-
-<details>
-<summary>Authentication Payloads</summary>
-
-### 1. Signup
-
-- **Route**: POST /signup
-- **Description**: This route is used to create a new user account.
-
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "password123",
-  "passwordConfirm": "password123"
-}
-```
-
-### 2. Login
-
-- **Route**: POST /login
-- **Description**: This route is used to authenticate a user and generate a JWT token.
-
-```json
-{
-  "email": "john@example.com",
-  "password": "password123"
-}
-```
-
-### 3. Forgot Password
-
-- **Route**: POST /forgot-password
-- **Description**: This route is used to request to reset a forgotten password.
-
-```json
-{
-  "email": "john@example.com"
-}
-```
-
-### 4. Reset Password/:token
-
-- **Route**: PATCH /reset-password/:token
-- **Description**: This route is used to reset a password using the token received after forgot password request.
-
-```json
-{
-  "password": "newpassword123",
-  "passwordConfirm": "newpassword123"
-}
-```
-
-### 5. Update My Password
-
-- **Route**: PATCH /update-my-password
-- **Description**: This route is used to update the password for the current user. It is a protected route, meaning the user has to be logged in to access it.
-
-```json
-{
-  "passwordCurrent": "oldpassword123",
-  "password": "newpassword123",
-  "passwordConfirm": "newpassword123"
-}
-```
-
-</details>
 
 ## Endpoints
 
