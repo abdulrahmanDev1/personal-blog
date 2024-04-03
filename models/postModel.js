@@ -24,6 +24,9 @@ const postSchema = new mongoose.Schema(
       ],
       minlength: [10, 'A post body must have more or equal then 10 characters']
     },
+    images: {
+      type: [String]
+    },
     createdAt: {
       type: Date,
       default: Date.now(),
@@ -80,11 +83,22 @@ postSchema.pre(/^find/, function (next) {
   next()
 })
 
+postSchema.pre('save', async function (next) {
+  if (this.isModified('body', 'title', 'category', 'images')) {
+    this.updatedAt = Date.now()
+  }
+  next()
+})
+
 postSchema.post('save', async function (doc) {
   const Category = mongoose.model('Category')
-  await Category.findByIdAndUpdate(doc.category, {
-    $inc: { postsCount: 1 }
-  })
+  try {
+    await Category.findByIdAndUpdate(doc.category, {
+      $inc: { postsCount: 1 }
+    })
+  } catch (error) {
+    console.error(error)
+  }
 })
 
 const Post = mongoose.model('Post', postSchema)

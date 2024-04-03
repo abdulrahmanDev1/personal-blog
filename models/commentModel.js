@@ -33,7 +33,10 @@ const commentSchema = new mongoose.Schema(
 
 commentSchema.post('save', async function (doc) {
   const Post = mongoose.model('Post')
-  await Post.findByIdAndUpdate(doc.post, { $push: { comments: doc._id } })
+  await Post.findByIdAndUpdate(doc.post, {
+    $push: { comments: doc._id },
+    $inc: { commentsCount: 1 }
+  })
 })
 
 const Comment = mongoose.model('Comment', commentSchema)
