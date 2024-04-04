@@ -1,14 +1,17 @@
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
+const morgan = require('morgan')
+const dotenv = require('dotenv')
+const cookieParser = require('cookie-parser')
+
 const AppError = require('./utils/appError.js')
 const globalErrorHandler = require('./controllers/errorController')
 const postRouter = require('./routes/postRoutes')
 const categoryRouter = require('./routes/categoryRoutes')
 const commentRouter = require('./routes/commentRoutes')
+const viewsRouter = require('./routes/viewsRouts')
 const userRouter = require('./routes/userRoutes')
-const morgan = require('morgan')
-const dotenv = require('dotenv')
 
 const rateLimit = require('express-rate-limit')
 const mongoSanitize = require('express-mongo-sanitize')
@@ -17,22 +20,29 @@ dotenv.config({ path: './.env' })
 
 const app = express()
 
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug')
+
+app.use(express.static(path.join(__dirname, 'public')))
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
 
-app.use(express.static(path.join(__dirname, 'public')))
-
-app.use(bodyParser.json())
-
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100
+  max: 10000
 })
 
-app.use(limiter)
+app.use('/api', limiter)
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
+
 app.use(mongoSanitize())
 
+app.use('/', viewsRouter)
 app.use('/api/v1/posts', postRouter)
 app.use('/api/v1/categories', categoryRouter)
 app.use('/api/v1/comments', commentRouter)

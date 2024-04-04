@@ -1,0 +1,31 @@
+extends layout 
+
+block content
+  div(class="card w-full max-w-md p-10 m-auto bg-neutral shadow-lg rounded-lg my-20")
+    div(class="px-4 py-5 sm:px-6")
+      h3(class="text-lg leading-6 font-medium text-neutral-content")
+        | #{user.name.split(' ')[0]}'s Profile
+      p(class="mt-1 max-w-2xl text-sm text-gray-500")
+        | Details and informations about you.
+    div(class="rounded-lg bg-white shadow-lg p-4 mt-4")
+      dl
+        div(class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6")
+          dt(class="text-sm font-medium text-gray-500")
+            | Full name
+          dd(class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2")
+            | #{user.name}
+        div(class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6")
+          dt(class="text-sm font-medium text-gray-500")
+            | Email address
+          dd(class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2")
+            | #{user.email}
+        div(class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6")
+          dt(class="text-sm font-medium text-gray-500")
+            | Role
+          dd(class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2")
+            | #{user.role}
+        div(class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6")
+          dt(class="text-sm font-medium text-gray-500")
+            | About
+          dd(class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2")
+            | #{user.about}
