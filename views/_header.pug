@@ -1,0 +1,24 @@
+div(class="navbar flex justify-between items-center bg-base-100")
+  div(class="flex-1 justify-between")
+    a(class="btn btn-ghost text-xl" href='/') Blog
+    if user
+      div.flex
+        div(class="dropdown dropdown-end")
+          div(tabindex="0" role="button" class="btn btn-ghost btn-circle avatar")
+            div(class="w-10 rounded-full ")
+              img(alt="account avatar", src=user.img || "/images/avatar.svg")
+              ul(tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52")
+                li
+                  a(href='/profile') Profile
+                li
+                  a Settings
+                li
+                  br
+                li
+                  a(class="hover:text-red-500 logoutBtn") Logout
+        div(class="flex justify-between items-center")
+          p(class="badge badge-primary badge-outline") #{user.name.split(' ')[0]}
+    else
+      div(class="flex justify-between items-center")
+        a(class="hover:bg-slate-700 btn btn-ghost rounded-badge mr-4" href="/login") Login
+        a(class="btn btn-secondary rounded-badge" href="/signup") Register

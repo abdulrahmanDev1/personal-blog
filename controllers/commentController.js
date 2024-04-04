@@ -11,6 +11,11 @@ exports.checkBody = (req, res, next) => {
   next()
 }
 
+exports.setPostId = (req, res, next) => {
+  if (req.params.postId) req.body.post = req.params.postId
+  next()
+}
+
 exports.getAllComments = Factory.getAll(Comment)
 
 exports.getComment = Factory.getOne(Comment)
