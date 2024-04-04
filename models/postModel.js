@@ -16,7 +16,7 @@ const postSchema = new mongoose.Schema(
     },
     body: {
       type: String,
-      required: [true, 'A post must have a body'],
+      required: [true, 'A post must have a content'],
       trim: true,
       maxlength: [
         200,
@@ -42,6 +42,11 @@ const postSchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: 'Category'
     },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'A post must have an author']
+    },
     comments: [
       {
         type: mongoose.Schema.ObjectId,
@@ -52,10 +57,12 @@ const postSchema = new mongoose.Schema(
       type: Number,
       default: 0
     },
-    likes: {
-      type: Number,
-      default: 0
-    },
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ],
     slug: String
   },
   {
@@ -78,6 +85,11 @@ postSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'comments',
     select: '-post -__v -user'
+  })
+
+  this.populate({
+    path: 'likes',
+    select: '_id'
   })
 
   next()

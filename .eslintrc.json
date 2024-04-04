@@ -27,8 +27,5 @@
       { "argsIgnorePattern": "req|res|next|val|err" }
     ],
     "quotes": [2, "single", { "avoidEscape": true }]
-  },
-  "parserOptions": {
-    "sourceType": "module"
   }
 }

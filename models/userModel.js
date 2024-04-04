@@ -37,10 +37,26 @@ const userSchema = new mongoose.Schema({
     enum: ['user', 'admin'],
     default: 'user'
   },
-  about: {
+  imgUrl: {
+    type: String,
+    default: 'default.jpg'
+  },
+  bio: {
     type: String,
     default: 'No information available'
   },
+  followers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+  following: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpires: Date

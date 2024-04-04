@@ -62,7 +62,6 @@ exports.login = catchAsync(async (req, res, next) => {
 })
 
 exports.protect = catchAsync(async (req, res, next) => {
-  // 1) Getting token and check of it's there
   let token
   if (
     req.headers.authorization &&
@@ -96,7 +95,6 @@ exports.protect = catchAsync(async (req, res, next) => {
       new AppError('User recently changed password! Please log in again.', 401)
     )
   }
-
   req.user = currentUser
   res.locals.user = currentUser
   next()

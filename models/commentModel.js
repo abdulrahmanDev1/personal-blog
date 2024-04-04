@@ -19,10 +19,10 @@ const commentSchema = new mongoose.Schema(
       ref: 'Post',
       required: [true, 'A comment must belong to a post']
     },
-    user: {
-      type: mongoose.Schema.ObjectId,
-      ref: 'User'
-      // required: [true, 'A comment must belong to a user']
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'A comment must have an author']
     }
   },
   {

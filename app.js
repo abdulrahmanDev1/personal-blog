@@ -10,7 +10,6 @@ const globalErrorHandler = require('./controllers/errorController')
 const postRouter = require('./routes/postRoutes')
 const categoryRouter = require('./routes/categoryRoutes')
 const commentRouter = require('./routes/commentRoutes')
-const viewsRouter = require('./routes/viewsRouts')
 const userRouter = require('./routes/userRoutes')
 
 const rateLimit = require('express-rate-limit')
@@ -42,11 +41,15 @@ app.use(cookieParser())
 
 app.use(mongoSanitize())
 
-app.use('/', viewsRouter)
 app.use('/api/v1/posts', postRouter)
 app.use('/api/v1/categories', categoryRouter)
 app.use('/api/v1/comments', commentRouter)
 app.use('/api/v1/users', userRouter)
+
+app.use((req, res, next) => {
+  console.log(req.user)
+  next()
+})
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404))
