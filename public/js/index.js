@@ -1,5 +1,7 @@
 import { login, logout } from './login'
 import {signup} from './signup'
+import styles from '../css/style.css'
+import alertStyles from '../css/alert.css'
 
 const loginForm = document.querySelector('.loginForm')
 const logoutBtn = document.querySelector('.logoutBtn')
