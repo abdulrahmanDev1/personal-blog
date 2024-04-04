@@ -2,22 +2,22 @@ extends layout
 
 block content
 
-  div(class="flex items-center justify-center h-screen bg-secondary-content")
-    div(class="w-full p-6 bg-primary-content border-t-4 border-gray-600 rounded-md shadow-md border-top lg:max-w-lg")
-      form.loginForm
-        h1.text-3xl.font-semibold.text-center.text-gray-700.mb-4 Log into your account
-        div(class="mb-4")
-          label.label
-            span.text-base.label-text Email
-          input.w-full.input.input-bordered(type="text", placeholder="Email Address", name="email" required)
-        div(class="mb-4")
-          label.label
-            span.text-base.label-text Password
-          input.w-full.input.input-bordered(type="password", placeholder="Enter Password", name="password" required minlength="8")
-          div.flex.items-center.justify-between
-            a(class="text-xs text-gray-600 hover:underline hover:text-blue-600 " href="#") Forget Password?
+  div(class="relative flex flex-col justify-center overflow-hidden mt-20")
+    div(class="w-full p-6 m-auto bg-neutral rounded-md shadow-md lg:max-w-xl")
+      h1(class="text-3xl font-semibold text-center text-purple-700") DaisyUI
+      form(class="space-y-4 loginForm")
         div
-            button.btn.btn-submit.rounded-badge.bg-info.w-full.m-y-4(type="submit") Login
-        div.text-center.text-gray-600.text-xs.mt-4
+          label(class="label")
+            span(class="text-base label-text") Email
+          input(type="text", placeholder="Email Address", class="w-full input input-bordered input-primary", name="email", required)
+        div
+          label(class="label")
+            span(class="text-base label-text") Password
+          input(type="password", placeholder="Enter Password", class="w-full input input-bordered input-primary", name="password", required, minlength="8")
+          div(class="flex items-center justify-between mb-4")
+            a(class="text-xs text-gray-600 hover:underline hover:text-blue-600", href="#") Forget Password?
+        div
+          button(class="btn btn-submit bg-info w-full m-y-4", type="submit") Login
+        div(class="text-center text-gray-600 text-xs mt-4")
           span Don't have an account? 
-          a(class="text-blue-600 hover:underline" href="/signup") Register
+          a(class="text-blue-600 hover:underline", href="/signup") Register

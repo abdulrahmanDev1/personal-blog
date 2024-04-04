@@ -10,6 +10,12 @@ exports.getLoginForm = (req, res) => {
   })
 }
 
+exports.getSignupForm = (req, res) => {
+  res.status(200).render('signup', {
+    title: 'Create an account'
+  })
+}
+
 exports.getProfile = (req, res) => {
   res.status(200).render('profile', {
     title: 'Your profile'
